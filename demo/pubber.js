@@ -7,5 +7,5 @@ console.log('Publisher bound to port 3005');
 
 setInterval(function(){
   console.log('sending a multipart message envelope');
-  sock.send(['kitty cats!', 'meow!']);
+  sock.send(['heartbeat', 'meow!']);
 }, 500);
