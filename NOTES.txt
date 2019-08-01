@@ -31,3 +31,13 @@ apt install php-pear
 
 edit php.ini file
  /etc/php/7.2/cli/php.ini
+
+--  Basic running as background daemon --
+
+https://www.npmjs.com/package/daemon
+
+ ---  Using Forever for always-up ---
+
+  sudo npm -g install forever
+  sudo forever start [Your AppFile Name]
+sudo forever stop [Your AppFile Name]
