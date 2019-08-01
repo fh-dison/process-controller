@@ -1,3 +1,6 @@
+Node.js Setup
+-----------------
+
 Zmq library package has to be installed.
 
 sudo apt install -y libzmq3-dev
@@ -14,3 +17,17 @@ npm install zeromq
 
 For Ubuntu, you might need to install build-essential package
 
+--------------------------
+
+PHP Setup
+
+apt install php7.2-cli
+
+apt install php-pear
+
+ apt install php7.2-dev (or php-dev?)
+
+ pecl install zmq-beta  (at first I tried pecl install zmq but there were errors)
+
+edit php.ini file
+ /etc/php/7.2/cli/php.ini
