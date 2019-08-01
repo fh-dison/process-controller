@@ -1,14 +1,11 @@
+#!/usr/bin/php
 <?php
 
 
-$context = new ZMQContext();
+/* $context = new ZMQContext();
 $publisher = new ZMQSocket($context, ZMQ::SOCKET_PUB);
 $publisher->bind("tcp://127.0.0.1:3005");
 
-// $result = $publisher->send("message", ZMQ::MODE_SNDMORE);
-// echo var_export($result);
-// $publisher->send("We want to see this");
-// die;
 
 $count = 0;
 while (++$count <= 100) {
@@ -22,4 +19,10 @@ while (++$count <= 100) {
 
     sleep (1);
 
+} */
+
+$count = 0;
+while (++$count <= 4) {
+  echo "$count\n";
+  sleep(1);
 }
