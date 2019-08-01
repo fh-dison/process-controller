@@ -3,7 +3,7 @@ var zmq = require('zeromq')
   , sock = zmq.socket('sub');
 
 sock.connect('tcp://127.0.0.1:3005');
-sock.subscribe('kitty cats');
+sock.subscribe('heartbeat');
 console.log('ZeroMQ loaded version ' + zmq.version);
 console.log('Subscriber connected to port 3005');
 
