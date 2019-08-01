@@ -1,4 +1,4 @@
-(function() {
+/* (function() {
   var childProcess = require("child_process");
   var oldSpawn = childProcess.spawn;
   function mySpawn() {
@@ -8,7 +8,7 @@
       return result;
   }
   childProcess.spawn = mySpawn;
-})();
+})(); */
 
 function run(cmd) {
   return new Promise((resolve, reject) => {
@@ -28,3 +28,17 @@ function run(cmd) {
 //run('/bin/ls').then(result=>{console.info(result);}).catch(error=>{console.info (error)});
 run('./worker.php').then(result=>{console.info(result);}).catch(error=>{console.info (error)});
 
+
+// subber.js
+var zmq = require('zeromq')
+  , sock = zmq.socket('sub');
+
+sock.connect('tcp://127.0.0.1:3005');
+sock.subscribe('heartbeat');
+console.log('ZeroMQ loaded version ' + zmq.version);
+console.log('Subscriber connected to port 3005');
+
+sock.on('message', function(topic, message) {
+
+  console.log('received a message type', topic.toString(), 'containing message:', message.toString());
+});

@@ -2,7 +2,7 @@
 <?php
 
 
-/* $context = new ZMQContext();
+$context = new ZMQContext();
 $publisher = new ZMQSocket($context, ZMQ::SOCKET_PUB);
 $publisher->bind("tcp://127.0.0.1:3005");
 
@@ -19,7 +19,7 @@ while (++$count <= 100) {
 
     sleep (1);
 
-} */
+}  
 
 $count = 0;
 while (++$count <= 4) {
