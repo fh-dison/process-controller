@@ -7,11 +7,11 @@ $publisher = new ZMQSocket($context, ZMQ::SOCKET_PUB);
 $publisher->bind("tcp://127.0.0.1:3005");
  */
 
-$max =  rand(1, 50);
+$max =  rand(1, 20);
 
 $count = 0;
 while (++$count <= $max) {
-  echo "Heartbeat  it's $count of $max \n";
+  echo "[Status] on step $count of $max \n";
 
 /*     $publisher->send("A", ZMQ::MODE_SNDMORE);
     $publisher->send("We don't want to see this");
@@ -22,6 +22,7 @@ while (++$count <= $max) {
     sleep (1);
 
 }  
+echo "[Status] finishing.\n";
 
 if (($max %5) == 0) {
   die (2);

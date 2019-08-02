@@ -9,6 +9,7 @@
   "author": "David Ison",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.3.3",
     "zeromq": "^5.1.0"
   }
 }

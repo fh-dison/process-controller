@@ -9,33 +9,9 @@
   }
   childProcess.spawn = mySpawn;
 })(); */
+const colors = require('colors');
 
-const 
-Reset = "\x1b[0m",
-Bright = "\x1b[1m",
-Dim = "\x1b[2m",
-Underscore = "\x1b[4m",
-Blink = "\x1b[5m",
-Reverse = "\x1b[7m",
-Hidden = "\x1b[8m",
 
-FgBlack = "\x1b[30m",
-FgRed = "\x1b[31m",
-FgGreen = "\x1b[32m",
-FgYellow = "\x1b[33m",
-FgBlue = "\x1b[34m",
-FgMagenta = "\x1b[35m",
-FgCyan = "\x1b[36m",
-FgWhite = "\x1b[37m",
-
-BgBlack = "\x1b[40m",
-BgRed = "\x1b[41m",
-BgGreen = "\x1b[42m",
-BgYellow = "\x1b[43m",
-BgBlue = "\x1b[44m",
-BgMagenta = "\x1b[45m",
-BgCyan = "\x1b[46m",
-BgWhite = "\x1b[47m";
 
 
 function run(cmd) {
@@ -45,11 +21,13 @@ function run(cmd) {
       console.info('New child process PID', command.pid)
       var result = ''
       command.stdout.on('data', function(data) {
-        console.info('\x1b[34m Got stdout', data.toString(), Reset);
+        console.info(`Worker sent ${data.toString().bold}`.cyan);
            result += data.toString()
       })
       command.on('close', function(code) {
-          console.info('Child process has stopped returned', code);
+          if (code !== 0) {
+            console.info(`Child process exited with error ${code}\n`.red);
+          }
           resolve(result)
       })
       command.on('error', function(err) { reject(err) })
@@ -61,14 +39,16 @@ function run(cmd) {
   setInterval(_=> {
 
     if (isActive) {
-      console.info(FgYellow, 'Worker is still active, skipping run', Reset);
+      console.info(`**${'Launcher Notification'.bold}** Worker is still active, postponing launch\n`.yellow);
       return;
     } 
     isActive = true;
+    console.info(`**${'Launcher Notification'.bold}** Launching worker\n`.yellow);
+
     run('./worker.php')
     .then(result=>{
       isActive = false;
-      console.info('Worker spawn was successful.');
+      console.info('Worker completed successfully.'.green);
 
   })
   .catch(error=>{console.info (error)});
