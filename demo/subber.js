@@ -9,5 +9,7 @@ console.log('Subscriber connected to port 3005');
 
 sock.on('message', function(topic, message) {
 
-  console.log('received a message type', topic.toString(), 'containing message:', message.toString());
+  console.log('Received ', topic.toString(),  message.toString());
 });
+
+
