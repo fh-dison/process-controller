@@ -9,8 +9,8 @@ $publisher->bind("tcp://127.0.0.1:3005");
 
 $max =  rand(1, 20);
 
-$count = 0;
-while (++$count <= $max) {
+$count = 1;
+while (++$count < $max) {
   echo "[Status] on step $count of $max \n";
 
 /*     $publisher->send("A", ZMQ::MODE_SNDMORE);
@@ -20,7 +20,6 @@ while (++$count <= $max) {
  
 
     sleep (1);
-
 }  
 echo "[Status] finishing.\n";
 

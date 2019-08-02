@@ -1,3 +1,6 @@
+var spawn = require('child_process').spawn;
+
+
 (function() {
   var childProcess = require("child_process");
   var oldSpawn = childProcess.spawn;
@@ -9,6 +12,6 @@
   }
   childProcess.spawn = mySpawn;
 })(); 
+
 // Example usage
-var spawn = require('child_process').spawn;
 var command = spawn(cmd)

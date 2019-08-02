@@ -1,34 +1,22 @@
-/* (function() {
-  var childProcess = require("child_process");
-  var oldSpawn = childProcess.spawn;
-  function mySpawn() {
-      console.log('spawn called');
-      console.log(arguments);
-      var result = oldSpawn.apply(this, arguments);
-      return result;
-  }
-  childProcess.spawn = mySpawn;
-})(); */
+
 const colors = require('colors');
-
-
+const spawn = require('child_process').spawn;
 
 
 function run(cmd) {
   return new Promise((resolve, reject) => {
-      var spawn = require('child_process').spawn;
-      var command = spawn(cmd)
-      console.info('New child process PID', command.pid)
-      var result = ''
+      const command = spawn(cmd);
+      console.info(`${'New child process'.inverse}  ${command.pid.toString().bold}\n`);
+      var result = '';
       command.stdout.on('data', function(data) {
-        console.info(`Worker sent ${data.toString().bold}`.cyan);
-           result += data.toString()
+        console.info(`Worker sent ${data.toString().trim().bold}`.cyan);
+           result += data.toString();
       })
       command.on('close', function(code) {
-          if (code !== 0) {
-            console.info(`Child process exited with error ${code}\n`.red);
-          }
-          resolve(result)
+        if (code !== 0) {
+          console.info(`Child process exited with error ${code}\n`.red);
+        }
+        resolve(result)
       })
       command.on('error', function(err) { reject(err) })
   })
@@ -36,10 +24,12 @@ function run(cmd) {
 
  
   let isActive = false;
+  let count = 0;
   setInterval(_=> {
 
+    count += 3;
     if (isActive) {
-      console.info(`**${'Launcher Notification'.bold}** Worker is still active, postponing launch\n`.yellow);
+      console.info(`\n**${'Launcher Notification'.bold}** Waiting for worker, active ${count} seconds.\n`.yellow);
       return;
     } 
     isActive = true;
@@ -47,8 +37,9 @@ function run(cmd) {
 
     run('./worker.php')
     .then(result=>{
+      console.info(`\nWorker completed successfully after ${count} seconds\n`.green);
       isActive = false;
-      console.info('Worker completed successfully.'.green);
+      count = 0;
 
   })
   .catch(error=>{console.info (error)});
