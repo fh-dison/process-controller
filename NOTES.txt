@@ -36,6 +36,7 @@ edit php.ini file
 
 https://www.npmjs.com/package/daemon
 
+
  ---  Using Forever for always-up ---
 
   sudo npm -g install forever
