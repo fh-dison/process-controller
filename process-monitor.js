@@ -3,9 +3,9 @@ require('colors');
 const spawn = require('child_process').spawn;
 
 
-function run(cmd) {
+function run(cmd, args) {
   return new Promise((resolve, reject) => {
-    const command = spawn(cmd);
+    const command = spawn(cmd, args);
     console.info(`${'New child process'.inverse} ${command.pid.toString().bold}\n`);
     let result = '';
     command.stdout.on('data', data => {
@@ -42,7 +42,7 @@ setInterval(_=> {
   isActive = true;
   console.info(`**${'Launcher Notification'.bold}** Launching worker\n`.yellow);
 
-  run('./worker.php')
+  run('./worker.php', ['param1', 'param2'])
   .then(result=>{
     console.info(`\nWorker completed successfully after ${count} seconds\n`.green);
     isActive = false;

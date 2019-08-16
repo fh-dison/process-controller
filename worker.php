@@ -7,6 +7,12 @@ $publisher = new ZMQSocket($context, ZMQ::SOCKET_PUB);
 $publisher->bind("tcp://127.0.0.1:3005");
  */
 
+echo "Args:\n";
+foreach ($argv as $arg) {
+  echo "$arg\n";
+}
+echo "\n\n";
+
 $max =  rand(1, 60);
 define('MILLISECONDS', 250);
 
